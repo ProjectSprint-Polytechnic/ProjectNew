@@ -1,0 +1,563 @@
+/* =========================================
+   ОСНОВНАЯ СТРАНИЦА
+   ========================================= */
+
+   .login-page {
+    position: relative;
+  
+    width: 100%;
+    min-height: 100vh;
+  
+    display: flex;
+  
+    overflow: hidden;
+  
+    background: #f5f5f5;
+  }
+  
+  
+  /* =========================================
+     ЛЕВАЯ ЧАСТЬ
+     ========================================= */
+  
+  .login-brand {
+    position: relative;
+  
+    width: 52%;
+    min-height: 100vh;
+  
+    overflow: hidden;
+  }
+  
+  
+  /* =========================================
+     ЗАДНИЕ СЕРЫЕ КРУГИ
+     ========================================= */
+  
+  .brand-circle-shadow {
+    position: absolute;
+  
+    border-radius: 50%;
+  
+    pointer-events: none;
+  }
+  
+  
+  /* дальняя тень */
+  
+  .shadow-one {
+    width: 100vh;
+    height: 100vh;
+  
+    left: -30vh;
+    top: 20vh;
+  
+    background: #e8e8e8;
+  }
+  
+  
+  /* ближняя тень */
+  
+  .shadow-two {
+    width: 100vh;
+    height: 100vh;
+  
+    left: -40vh;
+    top: 7vh;
+  
+    background: #d2d2d2;
+  }
+  
+  
+  /* =========================================
+     ОСНОВНОЙ ЧЁРНЫЙ КРУГ
+     ========================================= */
+  
+  .brand-circle {
+    position: absolute;
+  
+    z-index: 3;
+  
+    width: 100vh;
+    height: 100vh;
+  
+    left: -50vh;
+    top: 0;
+  
+    border-radius: 50%;
+  
+    background: #202020;
+  
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  /* =========================================
+     ЛОГОТИП УНИВЕРСИТЕТА
+     ========================================= */
+  
+  .university-logo {
+    position: absolute;
+  
+    width: 34vh;
+    height: 34vh;
+    object-fit: contain;
+  
+    /*
+      Центрируем логотип относительно
+      видимой части круга
+    */
+  
+    left: 75vh;
+    top: 50%;
+  
+    transform: translate(-50%, -50%);
+  }
+  
+  
+  /* =========================================
+     ПРАВАЯ ЧАСТЬ
+     ========================================= */
+  
+  .login-content {
+    position: relative;
+  
+    z-index: 10;
+  
+    width: 48%;
+    min-height: 100vh;
+  
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  
+    padding: 40px;
+  }
+  
+  
+  /* =========================================
+     КОНТЕЙНЕР ФОРМЫ
+     ========================================= */
+  
+  .login-form-container {
+    position: relative;
+  
+    width: 100%;
+    max-width: 335px;
+  }
+  
+  
+  /* =========================================
+     ФОТОГРАФИЯ НАД КАРТОЧКОЙ
+     ========================================= */
+  
+  .user-photo-wrapper {
+    position: absolute;
+  
+    z-index: 5;
+  
+    width: 82px;
+    height: 82px;
+  
+    top: -44px;
+    left: 50%;
+  
+    transform: translateX(-50%);
+  
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  
+    border-radius: 50%;
+  
+    background: #ffffff;
+  }
+  
+  
+  /* сама фотография */
+  
+  .user-photo {
+    width: 47px;
+    height: 58px;
+  
+    border-radius: 50%;
+  
+    object-fit: cover;
+  }
+  
+  
+  /* =========================================
+     КАРТОЧКА
+     ========================================= */
+  
+  .login-card {
+    position: relative;
+  
+    width: 100%;
+  
+    padding: 28px 30px 32px;
+  
+    border-radius: 16px;
+  
+    background: #ffffff;
+  
+    box-shadow:
+      0 15px 35px rgba(0, 0, 0, 0.08);
+  
+    box-sizing: border-box;
+  }
+  
+  
+  /* =========================================
+     ЗАГОЛОВОК
+     ========================================= */
+  
+  .login-card h1 {
+    margin: 0;
+  
+    font-size: 24px;
+    font-weight: 700;
+  
+    color: #111111;
+  }
+  
+  
+  /* =========================================
+     РЕГИСТРАЦИЯ
+     ========================================= */
+  
+  .registration-text {
+    margin: 8px 0 38px;
+  
+    font-size: 12px;
+  
+    color: #666666;
+  }
+  
+  
+  .registration-text a {
+    margin-left: 4px;
+  
+    color: #7474ff;
+  
+    text-decoration: none;
+  }
+  
+  
+  .registration-text a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  /* =========================================
+     ПОЛЯ
+     ========================================= */
+  
+  .input-wrapper {
+    position: relative;
+  
+    width: 100%;
+  
+    margin-bottom: 12px;
+  }
+  
+  
+  .login-input {
+    width: 100%;
+    height: 42px;
+  
+    padding: 0 13px;
+  
+    box-sizing: border-box;
+  
+    border: none;
+    border-radius: 10px;
+  
+    outline: none;
+  
+    background: #f6f6f6;
+  
+    font-size: 12px;
+  
+    color: #333333;
+  
+    transition: background 0.2s;
+  }
+  
+  
+  .login-input:focus {
+    background: #eeeeee;
+  }
+  
+  
+  .login-input::placeholder {
+    color: #999999;
+  }
+  
+  
+  /* =========================================
+     ПАРОЛЬ
+     ========================================= */
+  
+  .password-input {
+    padding-right: 42px;
+  }
+  
+  
+  .password-toggle {
+    position: absolute;
+  
+    top: 50%;
+    right: 12px;
+  
+    width: 22px;
+    height: 22px;
+  
+    padding: 0;
+  
+    transform: translateY(-50%);
+  
+    border: none;
+  
+    background: transparent;
+  
+    cursor: pointer;
+  
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .password-toggle img {
+    width: 18px;
+    height: 18px;
+  
+    object-fit: contain;
+  
+    opacity: 0.55;
+  
+    transition: opacity 0.2s;
+  }
+
+  .password-dot {
+    font-size: 18px;
+    line-height: 1;
+  
+    color: #777777;
+  }
+  
+  
+  .password-toggle:hover img {
+    opacity: 1;
+  }
+  
+  
+  /* =========================================
+     ЗАПОМНИТЬ МЕНЯ
+     ========================================= */
+  
+  .remember-me {
+    display: flex;
+  
+    align-items: center;
+  
+    gap: 6px;
+  
+    margin-top: 4px;
+  
+    font-size: 11px;
+  
+    color: #777777;
+  
+    cursor: pointer;
+  }
+  
+  
+  .remember-me input {
+    width: 13px;
+    height: 13px;
+  
+    margin: 0;
+  
+    cursor: pointer;
+  }
+  
+  
+  /* =========================================
+     КНОПКА
+     ========================================= */
+  
+  .login-button {
+    display: block;
+  
+    margin-top: 14px;
+    margin-left: auto;
+  
+    width: 90px;
+    height: 30px;
+  
+    border: none;
+    border-radius: 20px;
+  
+    background: #ee334f;
+  
+    color: #ffffff;
+  
+    font-size: 11px;
+  
+    cursor: pointer;
+  
+    transition:
+      transform 0.15s,
+      background 0.2s;
+  }
+  
+  
+  .login-button:hover {
+    background: #d92943;
+  }
+  
+  
+  .login-button:active {
+    transform: scale(0.97);
+  }
+  
+  
+  /* =========================================
+     ВОССТАНОВЛЕНИЕ ПАРОЛЯ
+     ========================================= */
+  
+  .forgot-password {
+    display: flex;
+  
+    flex-direction: column;
+  
+    margin-top: 40px;
+  
+    font-size: 11px;
+  
+    color: #555555;
+  }
+  
+  
+  .forgot-password a {
+    width: fit-content;
+  
+    margin-top: 3px;
+  
+    color: #ee334f;
+  
+    text-decoration: none;
+  }
+  
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  /* =========================================
+     АДАПТАЦИЯ
+     ========================================= */
+  
+  @media (max-width: 900px) {
+  
+    .login-brand {
+      width: 48%;
+    }
+  
+    .login-content {
+      width: 52%;
+  
+      padding: 25px;
+    }
+  
+    .login-form-container {
+      max-width: 310px;
+    }
+  
+    .login-card {
+      padding: 25px;
+    }
+  
+  }
+  
+  
+  @media (max-width: 700px) {
+  
+    .login-page {
+      min-height: 100vh;
+  
+      flex-direction: column;
+  
+      overflow: auto;
+    }
+  
+  
+    .login-brand {
+      width: 100%;
+      height: 300px;
+      min-height: 300px;
+    }
+  
+  
+    .brand-circle {
+      width: 500px;
+      height: 500px;
+  
+      left: 50%;
+      top: -250px;
+  
+      transform: translateX(-50%);
+    }
+  
+  
+    .shadow-one {
+      width: 500px;
+      height: 500px;
+  
+      left: calc(50% - 170px);
+      top: -205px;
+    }
+  
+  
+    .shadow-two {
+      width: 500px;
+      height: 500px;
+  
+      left: calc(50% - 210px);
+      top: -225px;
+    }
+  
+  
+    .university-logo {
+      width: 160px;
+      height: 160px;
+  
+      left: 50%;
+      top: 65%;
+  
+      transform: translate(-50%, -50%);
+    }
+  
+  
+    .login-content {
+      width: 100%;
+      min-height: auto;
+  
+      padding: 70px 20px 40px;
+    }
+  
+  
+    .login-form-container {
+      max-width: 335px;
+    }
+  
+  }
