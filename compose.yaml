@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: politech
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-politech}
+      POSTGRES_DB: politech
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U politech -d politech"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ${BACKEND_PATH:-../project-sprint-backend}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://politech:${POSTGRES_PASSWORD:-politech}@db:5432/politech
+      SECRET_KEY: ${SECRET_KEY:-local-development-key-change-for-production}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-local-development-jwt-change-for-production}
+      UPLOAD_FOLDER: /app/uploads
+      SEED: "1"
+    volumes:
+      - uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      start_period: 20s
+      retries: 12
+
+  web:
+    build: .
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${WEB_PORT:-5173}:80"
+
+volumes:
+  db-data:
+  uploads:

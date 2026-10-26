@@ -561,3 +561,12 @@
     }
   
   }
+.text-button { border: 0; padding: 0; background: transparent; color: #7474ff; font: inherit; cursor: pointer; }
+.registration-text .text-button { margin-left: 4px; }
+.text-button:hover { text-decoration: underline; }
+.forgot-password .text-button { width: fit-content; margin-top: 3px; color: #ee334f; }
+.form-error, .field-error { color: #b01d34; font-size: 12px; line-height: 1.5; margin-top: 8px; }
+.form-notice, .form-hint { color: #666; font-size: 12px; line-height: 1.5; margin-bottom: 16px; }
+.login-input[aria-invalid='true'] { outline: 1px solid #b01d34; }
+.login-button { width: auto; min-width: 90px; padding: 0 13px; }
+.password-input-wrapper .password-toggle { top: 21px; }
