@@ -1,0 +1,35 @@
+.settings-modal .modal-body { padding: 34px 34px 30px; }
+.settings { display: grid; grid-template-columns: 180px 1fr; gap: 40px; }
+.settings-nav { display: flex; flex-direction: column; gap: 10px; }
+.settings-nav h2 { font-size: 24px; font-weight: 700; margin-bottom: 30px; }
+.settings-nav button { display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px; border-radius: 10px; font-size: 13px; text-align: left; }
+.settings-nav button.is-active { background: var(--card); }
+.settings-body { display: flex; flex-direction: column; gap: 18px; padding-top: 6px; }
+.settings-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.set-row { display: flex; align-items: center; gap: 14px; }
+.set-row b { display: block; font-size: 13px; }
+.set-row small { display: block; font-size: 12px; margin-top: 2px; }
+.set-input { height: 34px; margin-top: 4px; }
+.set-hr { border: 0; border-top: 1px solid var(--line-strong); margin: 0; }
+.icon-btn { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; cursor: pointer; flex: none; }
+.icon-btn:hover { background: var(--line); }
+.logout { align-self: flex-end; display: inline-flex; gap: 6px; align-items: center; color: var(--red); font-size: 12px; margin-top: 16px; }
+.help-done { min-height: 260px; display: grid; place-items: center; align-content: center; gap: 22px; }
+.help-done p { font-size: 22px; }
+.faq { display: flex; flex-direction: column; gap: 10px; }
+.faq-item { background: var(--card); border-radius: 18px; }
+.faq-item button { width: 100%; display: flex; align-items: center; gap: 12px; padding: 18px 20px; text-align: left; font-weight: 700; }
+.faq-item p { padding: 0 20px 18px; color: var(--text-2); line-height: 1.5; font-size: 14px; }
+.motivation { display: flex; gap: 16px; background: var(--card); border-radius: 20px; padding: 20px; }
+.motivation p { margin-top: 6px; line-height: 1.5; color: var(--text-2); font-size: 14px; }
+@media (max-width: 640px) {
+  .settings { grid-template-columns: 1fr; gap: 16px; }
+  .settings-nav { flex-direction: row; flex-wrap: wrap; }
+  .settings-nav h2 { width: 100%; margin-bottom: 4px; }
+}
+
+.settings-edit {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}

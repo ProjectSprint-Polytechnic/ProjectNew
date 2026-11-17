@@ -1,0 +1,86 @@
+/* ===== Дизайн-токены из макета Figma «Политех» ===== */
+:root {
+  --bg: #efefef;           /* фон страницы */
+  --panel: #f8f8f8;        /* колонки, подложки */
+  --panel-2: #f4f4f6;
+  --card: #ffffff;         /* карточки */
+  --field: #f8f8fa;        /* поля ввода */
+  --line: #e4e3e8;
+  --line-strong: #d9d9d9;
+  --text: #000000;
+  --text-2: #6c6c6c;       /* второстепенный текст */
+  --text-3: #a3a3a3;
+  --chip: #efefef;
+  --dark: #000000;         /* чёрные кнопки */
+  --on-dark: #ffffff;
+  --overlay: rgba(0, 0, 0, 0.45);
+
+  --red: #e63246;          /* главный акцент */
+  --red-soft: #fde8ea;
+  --purple: #b04bfe;
+  --purple-soft: #f3e6ff;
+  --blue: #4646f4;
+  --blue-soft: #e8e8fe;
+  --lilac: #8d8dff;        /* «Новое», «Уже выполнено» */
+  --green: #2bb673;
+
+  --r-xl: 30px;
+  --r-lg: 20px;
+  --r-md: 10px;
+  --r-sm: 8px;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --sidebar-w: 285px;
+  --gap: 20px;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #121214;
+  --panel: #1b1b1e;
+  --panel-2: #202024;
+  --card: #26262b;
+  --field: #2e2e34;
+  --line: #34343a;
+  --line-strong: #3d3d44;
+  --text: #f4f4f6;
+  --text-2: #a6a6ad;
+  --text-3: #6e6e75;
+  --chip: #34343a;
+  --dark: #f4f4f6;
+  --on-dark: #111;
+  --overlay: rgba(0, 0, 0, 0.6);
+  --red-soft: #3a1d22;
+  --purple-soft: #2d1d3d;
+  --blue-soft: #1f1f45;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+a { color: inherit; }
+h1, h2, h3, h4, p { margin: 0; }
+img { display: block; max-width: 100%; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.muted { color: var(--text-2); }
+.row { display: flex; align-items: center; gap: 10px; }
+.grow { flex: 1; min-width: 0; }
+.clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

@@ -144,6 +144,28 @@ describe('API session', () => {
     await expect(html.restore('ivan')).rejects.toMatchObject({ status: 502 });
   });
 
+  it('uploads multipart bodies and reads authenticated file responses without JSON parsing', async () => {
+    const attachments = [{ id: 12, name: 'report.txt', url: '/api/files/12' }];
+    const fetchImpl = vi.fn(async (url, options) => {
+      expect(options.headers.Authorization).toBe(`Bearer ${jwt(1000)}`);
+      if (url === '/api/files') {
+        expect(options.method).toBe('POST');
+        expect(options.headers).not.toHaveProperty('Content-Type');
+        expect(options.body.get('files').name).toBe('report.txt');
+        return response(attachments, 201);
+      }
+      expect(url).toBe('/api/files/12?inline=1');
+      return new Response('report contents', { headers: { 'Content-Type': 'text/plain' } });
+    });
+    const { client } = setup(fetchImpl, { accessToken: jwt(1000) });
+    const form = new FormData();
+    form.append('files', new File(['report contents'], 'report.txt'));
+    await expect(client.request('/files', { method: 'POST', body: form })).resolves.toEqual(attachments);
+    const downloaded = await client.readFile(12, { inline: true });
+    expect(downloaded.type).toBe('text/plain');
+    await expect(downloaded.text()).resolves.toBe('report contents');
+  });
+
   it('revokes the refresh on logout and clears local state even if the server is offline', async () => {
     const fetchImpl = vi.fn(async () => response({ ok: true }));
     const { client, persistentStorage } = setup(fetchImpl, { accessToken: jwt(1000), refreshToken: 'refresh' });

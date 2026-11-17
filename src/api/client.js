@@ -71,33 +71,36 @@ export function createApiClient({
     return new ApiError('Сессия истекла. Войдите снова.', 401);
   }
 
-  async function send(path, { method = 'GET', body, token } = {}) {
+  async function send(path, { method = 'GET', body, token, asBlob = false } = {}) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
+    const form = body instanceof FormData;
     let response;
     try {
       response = await fetchImpl(`${base}${path}`, {
         method,
         headers: {
-          Accept: 'application/json',
-          ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+          Accept: asBlob ? '*/*' : 'application/json',
+          ...(body !== undefined && !form ? { 'Content-Type': 'application/json' } : {}),
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
+        ...(body !== undefined ? { body: form ? body : JSON.stringify(body) } : {}),
         signal: controller.signal,
       });
-    } catch {
+      if (response.status === 204) return null;
+      if (asBlob && response.ok) return await response.blob();
+      let data;
+      try { data = await response.json(); } catch {
+        throw new ApiError('Не удалось прочитать ответ сервера. Попробуйте ещё раз.', response.status);
+      }
+      if (!response.ok) {
+        throw new ApiError(typeof data.error === 'string' ? data.error : 'Не удалось выполнить запрос.', response.status, data.fields || {});
+      }
+      return data;
+    } catch (error) {
+      if (error instanceof ApiError) throw error;
       throw new ApiError('Не удалось связаться с сервером. Попробуйте ещё раз.');
     } finally { clearTimeout(timeout); }
-    if (response.status === 204) return null;
-    let data;
-    try { data = await response.json(); } catch {
-      throw new ApiError('Не удалось прочитать ответ сервера. Попробуйте ещё раз.', response.status);
-    }
-    if (!response.ok) {
-      throw new ApiError(typeof data.error === 'string' ? data.error : 'Не удалось выполнить запрос.', response.status, data.fields || {});
-    }
-    return data;
   }
 
   async function refresh() {
@@ -155,6 +158,7 @@ export function createApiClient({
     subscribe: (notify) => { subscribers.add(notify); return () => subscribers.delete(notify); },
     getSession: () => session,
     request,
+    readFile: (id, { inline = false } = {}) => request(`/files/${encodeURIComponent(id)}${inline ? '?inline=1' : ''}`, { asBlob: true }),
     login: ({ login, password, remember = false }) => authenticate('/auth/login', { login, password, remember }, remember),
     register: ({ remember = false, ...fields }) => authenticate('/auth/register', fields, remember),
     restore: (login) => send('/auth/restore', { method: 'POST', body: { login } }),

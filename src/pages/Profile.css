@@ -1,0 +1,30 @@
+@import './Competencies.css';
+
+.profile { display: flex; flex-direction: column; gap: 22px; padding-bottom: 20px; }
+.prof-head { position: relative; background: var(--panel); border-radius: 30px; }
+.prof-bg-btn { position: absolute; right: 22px; top: 18px; z-index: 1; height: 32px; padding: 0 16px; border-radius: 16px; background: #fff; color: #000; font-size: 13px; }
+.prof-avatar { position: absolute; left: 22px; top: 22px; z-index: 2; }
+.prof-avatar .avatar { border-radius: 22px; box-shadow: 0 0 0 4px var(--panel); }
+.prof-info { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding: 22px 22px 22px; flex-wrap: wrap; }
+.prof-info h1 { font-size: 24px; font-weight: 700; }
+.prof-chips { margin-top: 14px; gap: 8px; }
+.prof-tabs { margin-top: 30px; gap: 12px; }
+.prof-tabs button { height: 36px; padding: 0 20px; border-radius: 18px; background: var(--line-strong); font-size: 14px; }
+.prof-tabs button.is-active { background: var(--red); color: #fff; }
+.prof-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.prof-actions button {
+  width: 165px; height: 88px; border-radius: 18px; background: var(--card); display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 8px; font-size: 14px;
+}
+.prof-actions button:hover { box-shadow: 0 4px 18px rgba(0,0,0,.06); }
+.prof-actions .danger { color: var(--red); }
+.prof-content { width: 100%; max-width: 870px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.prof-card { background: var(--panel); border-radius: 26px; padding: 24px 32px; display: flex; flex-direction: column; gap: 10px; }
+.prof-card p { font-size: 16px; line-height: 1.5; }
+.prof-card p b { font-weight: 700; }
+.skillcard { padding: 14px; gap: 10px; }
+@media (max-width: 900px) {
+  .prof-actions button { width: calc(50% - 7px); height: 70px; }
+  .prof-actions { width: 100%; }
+  .prof-card { padding: 20px; }
+}
