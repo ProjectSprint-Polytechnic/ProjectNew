@@ -14,12 +14,12 @@
 :root[data-theme='dark'] .comment { background: var(--field); }
 .comment.is-faded { opacity: .45; }
 .comment-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
-.comment-from { background: var(--card); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 260px; }
+.comment-from { background: var(--card); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; min-width: min(260px, 100%); max-width: 100%; }
 .comment-from small, .comment-body small { font-size: 12px; }
 .comment-from b { font-size: 14px; }
 .comment-body { background: var(--card); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
 .comment-body p { font-size: 14px; }
 .link-red { color: var(--red); }
 .comment-new { display: flex; gap: 10px; }
-.comment-new .input { flex: 1; }
-.comment-new .btn { width: 46px; height: 46px; padding: 0; border-radius: 12px; }
+.comment-new .input { flex: 1; min-width: 0; }
+.comment-new .btn { flex: none; width: 46px; height: 46px; padding: 0; border-radius: 12px; }

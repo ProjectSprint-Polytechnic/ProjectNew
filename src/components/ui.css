@@ -37,7 +37,11 @@
 .chip-purple { background: var(--purple); color: #fff; }
 .chip-lilac { background: var(--lilac); color: #fff; }
 .chip-gray { background: #b6b6b6; color: #fff; }
-.chip-dot { width: 6px; height: 6px; border-radius: 50%; }
+.chip-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; }
+:is(.team-dep, .comp-person, .pcard-head, .prof-chips, .member, .newchat-people, .tt-person, .modal-head h2) .chip {
+  min-width: 0; max-width: 100%; height: auto; min-height: 28px; padding-block: 4px;
+  white-space: normal; overflow-wrap: anywhere;
+}
 button.chip:hover { filter: brightness(.96); }
 button.chip.is-active { background: var(--dark); color: var(--on-dark); }
 

@@ -4,17 +4,19 @@
 .dl-group { background: var(--panel); border-radius: 30px; padding: 19px 29px 24px; display: flex; flex-direction: column; gap: 12px; }
 .dl-group .column-head { margin-bottom: 22px; }
 .dl-row {
-  display: grid; grid-template-columns: 170px 1fr 230px 200px 170px; align-items: center; gap: 18px; text-align: left;
+  display: grid; grid-template-columns: max-content minmax(0, 1.55fr) minmax(0, 1.2fr) minmax(76px, 1fr) max-content;
+  align-items: center; gap: 18px; text-align: left;
   background: var(--card); border-radius: 18px; padding: 14px 20px; font-size: 14px;
 }
 .dl-row:hover { box-shadow: 0 4px 18px rgba(0,0,0,.06); }
 .dl-row .chip { justify-self: end; }
 .dl-date { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.dl-title, .dl-person { overflow-wrap: anywhere; }
 .dl-title b { display: block; font-size: 16px; }
 .dl-title small { font-size: 12px; }
 .dl-person { display: inline-flex; align-items: center; gap: 10px; }
 @media (max-width: 1200px) {
-  .dl-row { grid-template-columns: 1fr auto; }
+  .dl-row { grid-template-columns: minmax(0, 1fr) auto; }
   .dl-person, .dl-progress { display: none; }
   .dl-date { grid-column: 1 / -1; }
 }
