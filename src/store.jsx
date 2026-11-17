@@ -23,15 +23,27 @@ const defaults = { all: false, messages: true, email: false, tasks: true, commen
 
 export function AppProvider({ children, client = api }) {
   const session = useSyncExternalStore(client.subscribe, client.getSession);
+  const [logoutNotice, setLogoutNotice] = useState('');
   const authed = Boolean(session);
+
+  async function logout() {
+    setLogoutNotice('');
+    try {
+      await client.logout();
+    } catch {
+      setLogoutNotice('Вы вышли на этом устройстве. Не удалось завершить сессию на сервере.');
+    }
+  }
+
   return (
-    <AppState key={authed ? 'signed-in' : 'signed-out'} client={client} authed={authed}>
+    <AppState key={session?.user?.id ?? (authed ? 'signed-in' : 'signed-out')} client={client} authed={authed}
+      logout={logout} logoutNotice={logoutNotice} clearLogoutNotice={() => setLogoutNotice('')}>
       {children}
     </AppState>
   );
 }
 
-function AppState({ children, client, authed }) {
+function AppState({ children, client, authed, logout, logoutNotice, clearLogoutNotice }) {
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState('');
   const [attempt, setAttempt] = useState(0);
@@ -128,7 +140,7 @@ function AppState({ children, client, authed }) {
     loading: authed && !data && !loadError, loadError,
     retry: () => { setLoadError(''); setAttempt((current) => current + 1); },
     reloadUser, reloadBoard, reloadProjects, updateSettings, uploadFiles, downloadFile,
-    logout: client.logout, collapsed, setCollapsed, modal, setModal, query, setQuery,
+    logout, logoutNotice, clearLogoutNotice, collapsed, setCollapsed, modal, setModal, query, setQuery,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

@@ -123,7 +123,7 @@ function ChatThread({ chat, onRead, onMessage }) {
   const [findResult, setFindResult] = useState(null);
   const [membersOpen, setMembersOpen] = useState(false);
   const endRef = useRef(null);
-  const lastId = useRef(0);
+  const lastId = useRef(null);
   const query = find.trim();
   const shown = query ? (findResult?.query === query ? findResult.items : null) : messages;
   const finalMessage = shown?.at(-1)?.id;
@@ -132,15 +132,19 @@ function ChatThread({ chat, onRead, onMessage }) {
     let active = true;
     let timer;
     async function poll() {
-      const after = lastId.current;
       try {
-        const result = await client.request(`${path}?limit=${PAGE_SIZE}${after ? '&after=' + after : ''}`);
-        if (!active) return;
-        if (!after) setHasOlder(result.length >= PAGE_SIZE);
-        lastId.current = Math.max(lastId.current, result.at(-1)?.id || 0);
-        setMessages((current) => mergeMessages(current || [], result));
+        let hasMore;
+        do {
+          const after = lastId.current;
+          const result = await client.request(`${path}?limit=${PAGE_SIZE}${after === null ? '' : '&after=' + after}`);
+          if (!active) return;
+          if (after === null) setHasOlder(result.length >= PAGE_SIZE);
+          lastId.current = result.at(-1)?.id ?? after ?? 0;
+          setMessages((current) => mergeMessages(current || [], result));
+          if (result.length) onRead(chat.id);
+          hasMore = after !== null && result.length === PAGE_SIZE;
+        } while (hasMore);
         setHistoryError('');
-        if (result.length) onRead(chat.id);
       } catch (failure) {
         if (active) setHistoryError(failure.message);
       } finally {

@@ -206,4 +206,21 @@ describe('API session', () => {
     expect(JSON.parse(persistentStorage.getItem(key))).toMatchObject({ accessToken: jwt(3000), refreshToken: 'new-refresh' });
     await expect(client.request('/projects')).resolves.toEqual([]);
   });
+
+  it('keeps the latest account when an earlier login finishes out of order', async () => {
+    let finishFirst;
+    const fetchImpl = vi.fn((_url, { body }) => {
+      if (JSON.parse(body).login === 'first') {
+        return new Promise((resolve) => { finishFirst = resolve; });
+      }
+      return Promise.resolve(response({ accessToken: jwt(3000), user: { id: 2 } }));
+    });
+    const { client, persistentStorage } = setup(fetchImpl);
+    const first = expect(client.login({ login: 'first', password: 'secret', remember: true })).rejects.toBeInstanceOf(ApiError);
+    await client.login({ login: 'second', password: 'secret', remember: true });
+    finishFirst(response({ accessToken: jwt(1000), user: { id: 1 } }));
+    await first;
+    expect(client.getSession().user.id).toBe(2);
+    expect(JSON.parse(persistentStorage.getItem(key)).accessToken).toBe(jwt(3000));
+  });
 });

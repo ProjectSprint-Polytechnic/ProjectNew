@@ -44,6 +44,7 @@ export function createApiClient({
   let session = temporary || readSession(persistentStorage);
   let remember = Boolean(session && !temporary);
   let generation = 0;
+  let authenticationAttempt = 0;
   let refreshPromise = null;
   const base = baseUrl.replace(/\/+$/, '');
 
@@ -145,7 +146,9 @@ export function createApiClient({
   }
 
   async function authenticate(path, body, persist) {
+    const attempt = ++authenticationAttempt;
     const result = await send(path, { method: 'POST', body });
+    if (attempt !== authenticationAttempt) throw new ApiError('Начат другой вход в аккаунт.');
     if (typeof result.accessToken !== 'string') throw new ApiError('Сервер не вернул данные для входа.');
     generation += 1;
     remember = persist;
@@ -163,9 +166,15 @@ export function createApiClient({
     register: ({ remember = false, ...fields }) => authenticate('/auth/register', fields, remember),
     restore: (login) => send('/auth/restore', { method: 'POST', body: { login } }),
     logout: async () => {
+      authenticationAttempt += 1;
       if (!session) return;
+      const currentGeneration = generation;
       const refreshToken = session.refreshToken;
-      try { await request('/auth/logout', { method: 'POST', body: { refreshToken } }); } finally { clearSession(); }
+      try {
+        await request('/auth/logout', { method: 'POST', body: { refreshToken } });
+      } finally {
+        if (generation === currentGeneration) clearSession();
+      }
     },
   };
 }

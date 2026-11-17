@@ -31,7 +31,7 @@ function PasswordInput({ placeholder, value, onChange, error, pending, autoCompl
 }
 
 export default function Auth({ mode }) {
-  const { client } = useApp();
+  const { client, logoutNotice, clearLogoutNotice } = useApp();
   const isLogin = mode === 'login';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -47,6 +47,7 @@ export default function Auth({ mode }) {
   const submit = async (e) => {
     e.preventDefault();
     if (pending) return;
+    clearLogoutNotice();
     setPending(true);
     setErrors({});
     setNotice('');
@@ -90,8 +91,13 @@ export default function Auth({ mode }) {
         </span>
         <h1>{restore ? 'Восстановление пароля' : isLogin ? 'Вход' : 'Регистрация'}</h1>
         {!restore && <p className="auth-sub">
-          {isLogin ? <>Нет учётной записи? <a href="#/register">Регистрация</a></> : <>Есть учётная запись? <a href="#/login">Вход</a></>}
+          {isLogin ? 'Нет учётной записи?' : 'Есть учётная запись?'}{' '}
+          <a href={isLogin ? '#/register' : '#/login'} aria-disabled={pending} tabIndex={pending ? -1 : undefined}
+            onClick={(event) => { if (pending) event.preventDefault(); }}>
+            {isLogin ? 'Регистрация' : 'Вход'}
+          </a>
         </p>}
+        {isLogin && !restore && logoutNotice && <p className="auth-note" role="status">{logoutNotice}</p>}
 
         <div className="auth-fields">
           {!isLogin && <Input icon="userCircle" placeholder="Имя" aria-label="Имя" value={name} onChange={(e) => setName(e.target.value)} disabled={pending} autoComplete="name" />}

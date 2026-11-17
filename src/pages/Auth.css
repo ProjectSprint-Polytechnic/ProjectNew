@@ -27,6 +27,7 @@
 .auth h1 { font-size: 36px; font-weight: 700; }
 .auth-sub { margin-top: 14px; font-size: 18px; }
 .auth-sub a, .auth-restore button { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.auth-sub a[aria-disabled='true'] { opacity: .55; cursor: wait; }
 .auth-fields { margin-top: 56px; display: flex; flex-direction: column; gap: 22px; }
 .auth .input { background: var(--panel-2); height: 56px; border-radius: 16px; }
 :root[data-theme='dark'] .auth .input { background: var(--field); }

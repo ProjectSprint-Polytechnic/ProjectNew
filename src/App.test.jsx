@@ -40,6 +40,9 @@ describe('connected app', () => {
     await user.click(screen.getByRole('button', { name: 'Продолжить' }));
     expect(screen.getByRole('button', { name: 'Подождите…' })).toBeDisabled();
     expect(screen.getByLabelText('Логин или email')).toBeDisabled();
+    expect(screen.getByRole('link', { name: 'Регистрация' })).toHaveAttribute('aria-disabled', 'true');
+    await user.click(screen.getByRole('link', { name: 'Регистрация' }));
+    expect(window.location.hash).toBe('#/login');
     expect(fetchImpl).toHaveBeenCalledTimes(1);
     await act(async () => resolveLogin(response({ accessToken: 'access', user: profile })));
     expect(await screen.findByRole('heading', { name: 'Подготовить прототип' })).toBeInTheDocument();

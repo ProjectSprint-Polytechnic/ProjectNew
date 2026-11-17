@@ -50,7 +50,7 @@ function Routes() {
             <>
               <p role="alert">{loadError}</p>
               <div className="auth-actions row">
-                <button type="button" className="btn btn-ghost" onClick={() => { void logout().catch(() => {}); }}>Выйти</button>
+                <button type="button" className="btn btn-ghost" onClick={logout}>Выйти</button>
                 <button type="button" className="btn btn-red" onClick={retry}>Повторить</button>
               </div>
             </>

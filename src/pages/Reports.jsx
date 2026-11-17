@@ -43,7 +43,7 @@ function AddReport({ tasks, initialTaskId, onClose, onSave }) {
 }
 
 export default function Reports() {
-  const { client, tasks, query, reloadBoard, uploadFiles } = useApp();
+  const { client, columns, tasks, query, reloadBoard, uploadFiles } = useApp();
   const [reports, setReports] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -52,7 +52,8 @@ export default function Reports() {
   const [openTask, setOpenTask] = useState(null);
   const [openReport, setOpenReport] = useState(null);
   const [commentsFor, setCommentsFor] = useState(null);
-  const done = tasks.filter((t) => t.completedAt || t.progress === 100);
+  const doneColumns = new Set(columns.filter((column) => column.isDone).map((column) => column.id));
+  const done = tasks.filter((task) => doneColumns.has(task.column));
   const shown = done.filter((t) => matchTask(t, query));
   const task = done.find((t) => t.id === openTask);
   const report = reports.find((r) => r.id === openReport);
