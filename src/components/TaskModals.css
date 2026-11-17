@@ -1,0 +1,25 @@
+.field-sub { font-size: 14px; font-weight: 700; margin-top: 4px; }
+.readbox { background: var(--card); border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--text-2); line-height: 1.4; }
+.readbox.row { color: var(--text); width: fit-content; min-width: 100%; }
+.tags { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+.tag-lg { height: 36px; padding: 0 16px; font-size: 14px; }
+.sep { border: 0; border-top: 3px solid var(--line-strong); margin: 0; }
+.color-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex: none; }
+.progress-edit { display: flex; flex-direction: column; gap: 6px; }
+.progress-edit input[type=range] { width: 100%; accent-color: var(--red); }
+.task-error { color: var(--red); }
+.task-error button { text-decoration: underline; }
+
+.comment { background: var(--panel-2); border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+:root[data-theme='dark'] .comment { background: var(--field); }
+.comment.is-faded { opacity: .45; }
+.comment-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.comment-from { background: var(--card); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 260px; }
+.comment-from small, .comment-body small { font-size: 12px; }
+.comment-from b { font-size: 14px; }
+.comment-body { background: var(--card); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.comment-body p { font-size: 14px; }
+.link-red { color: var(--red); }
+.comment-new { display: flex; gap: 10px; }
+.comment-new .input { flex: 1; }
+.comment-new .btn { width: 46px; height: 46px; padding: 0; border-radius: 12px; }

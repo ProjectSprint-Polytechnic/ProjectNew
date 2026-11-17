@@ -1,0 +1,53 @@
+.comp-layout { display: grid; grid-template-columns: 406px 1fr; gap: 33px; height: 100%; min-height: 0; }
+.team-panel { background: var(--panel); border-radius: 30px; padding: 18px 18px 0; display: flex; flex-direction: column; min-height: 0; }
+.team-head { background: var(--card); border-radius: 16px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; position: relative; margin-bottom: 28px; }
+.team-head::after { content: ''; position: absolute; left: 0; right: 0; bottom: -14px; height: 2px; background: var(--red); }
+.team-head h2 { font-size: 20px; font-weight: 700; }
+.team-head .row { font-size: 13px; gap: 6px; }
+.team-list { overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding-bottom: 18px; }
+.team-dep { background: var(--card); border-radius: 18px; padding: 16px 16px 10px; display: flex; flex-direction: column; gap: 6px; }
+.team-dep .chip { align-self: flex-start; margin-bottom: 6px; }
+.team-row { display: flex; align-items: center; gap: 12px; font-size: 15px; padding: 3px 0; }
+.team-row i { width: 13px; height: 13px; border-radius: 50%; flex: none; }
+
+.comp-main { background: var(--panel); border-radius: 30px; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.comp-person { background: var(--card); border-radius: 18px; padding: 16px 20px; display: flex; justify-content: space-between; gap: 16px; }
+.comp-person h2 { font-size: 20px; font-weight: 700; }
+.comp-person-r { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 10px; }
+.skill { display: flex; flex-direction: column; gap: 10px; }
+.skill-head, .topic { background: var(--card); border-radius: 14px; display: flex; align-items: center; gap: 14px; padding: 0 20px; text-align: left; width: 100%; }
+.skill-head { height: 50px; }
+.skill-head b { min-width: 74px; font-size: 15px; }
+.skill-pct { font-size: 14px; font-weight: 700; }
+.topic { height: 56px; font-size: 15px; }
+.topic:hover, .skill-head:hover { box-shadow: 0 3px 14px rgba(0,0,0,.05); }
+.topic-st { font-size: 14px; margin-right: 12px; }
+.topic-done { height: 32px; padding: 0 20px; font-size: 13px; }
+.recs { background: var(--card); border-radius: 18px; padding: 16px 16px 12px; display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+.recs-head { display: flex; justify-content: space-between; align-items: center; font-size: 15px; padding: 0 4px; }
+.recs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; overflow: hidden; }
+.recs-all { align-self: flex-end; display: inline-flex; gap: 10px; align-items: center; font-size: 14px; padding: 6px 4px; }
+
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; overflow-y: auto; min-height: 0; align-items: start; }
+.comp-col { display: flex; flex-direction: column; gap: 20px; }
+.pcard { background: var(--panel); border-radius: 26px; padding: 10px; display: flex; flex-direction: column; gap: 10px; transition: background .2s; }
+.pcard.is-hl { background: var(--lilac); }
+.pcard-in { background: var(--card); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.pcard-head { display: flex; justify-content: space-between; align-items: flex-start; text-align: left; gap: 10px; padding-bottom: 6px; }
+.pcard-head h3 { font-size: 18px; font-weight: 700; }
+.pcard-count { display: flex; flex-direction: column; align-items: flex-end; font-size: 12px; }
+.pcard-count b { font-size: 14px; }
+.pskill { background: var(--panel); border-radius: 12px; height: 40px; padding: 0 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.pskill b { min-width: 60px; }
+.pcard-toggle { background: var(--card); border-radius: 16px; height: 46px; font-size: 16px; }
+.pcard-toggle:hover { filter: brightness(.98); }
+
+@media (max-width: 1280px) {
+  .comp-layout { grid-template-columns: 300px 1fr; gap: 20px; }
+}
+@media (max-width: 1000px) {
+  .comp-layout { grid-template-columns: 1fr; height: auto; }
+  .team-panel { max-height: 420px; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .recs-row { grid-template-columns: 1fr; }
+}
