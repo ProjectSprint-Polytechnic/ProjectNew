@@ -12,10 +12,11 @@
 .side-user { position: relative; }
 .side-user-btn { display: flex; align-items: center; gap: 12px; padding: 4px; width: 100%; text-align: left; border-radius: 14px; }
 .side-user-btn:hover { background: var(--panel); }
+.side-user-btn .grow { overflow-wrap: anywhere; }
 .side-user-btn b { display: block; font-size: 15px; font-weight: 700; }
 .side-user-btn small { display: block; font-size: 12px; margin-top: 1px; }
 .side-menu {
-  position: absolute; z-index: 30; top: 54px; left: 0; width: 240px; background: var(--card); border-radius: 16px;
+  position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; width: 240px; background: var(--card); border-radius: 16px;
   box-shadow: var(--shadow); padding: 6px; display: flex; flex-direction: column; border: 1px solid var(--line);
 }
 .side-menu button { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; text-align: left; font-size: 14px; }
@@ -52,14 +53,14 @@
 /* ---- Шапка ---- */
 .topbar { display: flex; gap: 14px; align-items: center; }
 .global-search {
-  flex: 1; height: 59px; background: var(--card); border-radius: 30px; display: flex; align-items: center; gap: 12px; padding: 0 22px;
+  flex: 1; min-width: 0; height: 59px; background: var(--card); border-radius: 30px; display: flex; align-items: center; gap: 12px; padding: 0 22px;
   color: var(--text-2);
 }
-.global-search input { flex: 1; border: 0; outline: 0; background: transparent; font-size: 20px; color: var(--text); }
+.global-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 20px; color: var(--text); }
 .global-search input::placeholder { color: var(--text-2); }
-.burger { display: none; width: 59px; height: 59px; border-radius: 30px; background: var(--card); place-items: center; }
+.burger { display: none; flex: none; width: 59px; height: 59px; border-radius: 30px; background: var(--card); place-items: center; }
 
-.tabs-row { display: flex; gap: 16px; align-items: center; }
+.tabs-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
 .tabs { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; flex: none; max-width: 100%; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
@@ -79,9 +80,11 @@
 .side-scrim { display: none; }
 
 /* ---- Адаптив ---- */
+@media (min-width: 901px) {
+  .sidebar.is-collapsed .side-menu { position: fixed; inset: auto; margin: -48px 0 0 76px; }
+}
 @media (max-width: 1280px) {
   .app { gap: 20px; padding: 14px; }
-  .tabs-row { flex-wrap: wrap; }
   .kw-search { flex-basis: 100%; }
 }
 @media (max-width: 900px) {

@@ -7,11 +7,12 @@
 }
 .column.is-over { box-shadow: inset 0 0 0 2px var(--line-strong); }
 .column-head {
-  display: flex; align-items: center; gap: 10px; background: var(--card); border-radius: 12px; padding: 0 14px; height: 34px;
+  display: flex; flex: none; align-items: center; gap: 10px; background: var(--card); border-radius: 12px; padding: 7px 14px; min-height: 34px;
   position: relative; margin-bottom: 32px;
 }
 .column-head::after { content: ''; position: absolute; left: 0; right: 0; bottom: -16px; height: 2px; background: var(--col); border-radius: 2px; }
-.column-head h2 { font-size: 15px; font-weight: 500; }
+.column-head h2 { overflow-wrap: anywhere; font-size: 15px; font-weight: 500; }
+.column-head > :not(h2) { flex: none; }
 .column-dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--col); position: relative; }
 .column-dot::after { content: ''; position: absolute; inset: 2px; border-radius: 50%; background: var(--col); }
 .column-count { font-size: 12px; color: var(--text-2); }

@@ -6,6 +6,9 @@
 .prof-avatar { position: absolute; left: 22px; top: 22px; z-index: 2; }
 .prof-avatar .avatar { border-radius: 22px; box-shadow: 0 0 0 4px var(--panel); }
 .prof-info { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding: 22px 22px 22px; flex-wrap: wrap; }
+.prof-info > div { min-width: 0; }
+.prof-info, .prof-card { overflow-wrap: anywhere; }
+.prof-chips, .prof-tabs { flex-wrap: wrap; }
 .prof-info h1 { font-size: 24px; font-weight: 700; }
 .prof-chips { margin-top: 14px; gap: 8px; }
 .prof-tabs { margin-top: 30px; gap: 12px; }

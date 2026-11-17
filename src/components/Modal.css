@@ -8,10 +8,11 @@
   overflow: hidden;
 }
 .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 30px 40px 10px; }
-.modal-head h2 { font-size: 24px; font-weight: 700; }
+.modal-head h2 { min-width: 0; overflow-wrap: anywhere; font-size: 24px; font-weight: 700; }
+.modal-head > .row { flex: none; }
 .modal-x { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: var(--text-2); }
 .modal-x:hover { background: var(--line); color: var(--text); }
-.modal-body { padding: 20px 40px 34px; overflow-y: auto; display: flex; flex-direction: column; gap: 22px; }
+.modal-body { padding: 20px 40px 34px; overflow-y: auto; display: flex; flex-direction: column; gap: 22px; overflow-wrap: anywhere; }
 @keyframes fade { from { opacity: 0; } }
 @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
 @media (max-width: 640px) {

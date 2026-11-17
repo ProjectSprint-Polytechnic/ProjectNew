@@ -1,15 +1,16 @@
 @import './Tasks.css';
 
-.proj-board { display: grid; grid-template-columns: 2fr 1fr; gap: 33px; height: 100%; min-height: 0; }
+.proj-board { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 33px; height: 100%; min-height: 0; }
 .proj-column { background: var(--panel); border-radius: 30px; padding: 19px 29px 0; display: flex; flex-direction: column; min-height: 0; }
-.proj-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; overflow-y: auto; padding-bottom: 24px; align-items: start; }
-.proj-cards.one { grid-template-columns: 1fr; }
-.proj-card { background: var(--card); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.proj-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; overflow-y: auto; padding-bottom: 24px; align-items: start; }
+.proj-cards.one { grid-template-columns: minmax(0, 1fr); }
+.proj-board:has(+ .fab) .proj-cards.one { padding-bottom: 90px; }
+.proj-card { background: var(--card); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; overflow-wrap: anywhere; }
 .proj-card h3 { font-size: 20px; font-weight: 700; }
 .proj-boxes { display: flex; flex-wrap: wrap; gap: 12px; }
-.proj-box { background: var(--panel); border-radius: 12px; padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 8px; }
+.proj-box { background: var(--panel); border-radius: 12px; padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; max-width: 100%; }
 .proj-box small { font-size: 12px; padding-left: 2px; }
-.proj-pill { background: var(--card); border-radius: 10px; height: 36px; padding: 0 12px 0 6px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+.proj-pill { background: var(--card); border-radius: 10px; min-height: 36px; padding: 5px 12px 5px 6px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
 .proj-desc { font-size: 14px; color: var(--text-2); line-height: 1.3; }
 .proj-progress { display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
 .proj-card .btn { height: 46px; border-radius: 16px; }
@@ -22,12 +23,12 @@
 .proj-modal .modal-head h2 { font-size: 30px; }
 .proj-edit { font-size: 14px; gap: 8px; padding: 6px 10px; border-radius: 10px; }
 .proj-edit:hover { background: var(--line); }
-.proj-grid { display: grid; grid-template-columns: 1fr 1fr 1.1fr; gap: 20px; align-items: start; }
+.proj-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr); gap: 20px; align-items: start; }
 .proj-col { display: flex; flex-direction: column; gap: 20px; }
 .pbox { background: var(--card); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
 .pbox .doclist { padding: 0; margin: 0; }
 .pbox h4 { font-size: 18px; font-weight: 700; }
-.proj-dates { justify-content: space-between; }
+.proj-dates { flex-wrap: wrap; justify-content: space-between; }
 .readpill { background: var(--panel); border-radius: 12px; padding: 10px 16px; font-size: 14px; }
 .proj-left { justify-content: space-between; }
 .proj-left b { font-size: 18px; }
@@ -45,13 +46,18 @@
 .add-round:hover { background: var(--line); }
 
 @media (max-width: 1280px) {
-  .proj-board { grid-template-columns: 1fr 1fr; gap: 20px; }
-  .proj-cards { grid-template-columns: 1fr; }
-  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .proj-board { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .proj-cards { grid-template-columns: minmax(0, 1fr); }
+  .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
-  .proj-board { grid-template-columns: 1fr; height: auto; }
+  .proj-board { grid-template-columns: minmax(0, 1fr); height: auto; }
   .proj-column { padding: 16px 16px 0; }
-  .proj-grid { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: minmax(0, 1fr); }
   .fab { right: 20px; bottom: 20px; }
+}
+@media (max-width: 480px) {
+  .proj-modal .modal-head { flex-wrap: wrap; }
+  .proj-modal .modal-head h2 { flex: 1 1 160px; }
+  .proj-modal .modal-head > .row { margin-left: auto; }
 }
